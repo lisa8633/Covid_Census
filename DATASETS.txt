@@ -1,0 +1,98 @@
+Project Theme: Public Health
+
+Primary Dataset: COVID-19 cases from JHU daily reports (JHU_staging in BigQuery)
+URLs for data:
+CasesNov02.txt - https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/11-02-2020.csv
+CasesOct26.txt - https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/10-26-2020.csv
+CasesOct19.txt - https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/10-19-2020.csv
+CasesOct12.txt - https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/10-12-2020.csv
+
+Key Information:
+Cases{date}.txt - Each entity houses state-by-state COVID statistics up to the marked date. Changes over time could illustrate which states are currently weathering a COVID surge or keeping cases stable.
+Province_State - This attribute denotes the US State associated with each week's record of metrics. It is useful for performing joins with the Census datasets.
+Incident_Rate - This attribute represents the cases per 100,000 persons to give a normalized picture of COVID infections with respect to state population. It could be interesting to see how this correlates with the poverty levels in a state.
+Mortality_Rate - This attribute represents the percentage of confirmed cases that resulted in deaths in each state. It could be interesting to see how this number changes based on the senior population and the senior poverty levels in each state.
+Hospitalization_Rate - Similar to mortality, this attribute tracks the percentage of confirmed cases that result in hospitalization. This is a key metric to examine against all five of the entities from the American Community Survey, as higher hospitalization rates could be associated with population age or poverty and also stress healthcare resources.
+
+
+Entity Samples:
+
+CasesNov02.txt:
+Province_State,Country_Region,Last_Update,Lat,Long_,Confirmed,Deaths,Recovered,Active,FIPS,Incident_Rate,People_Tested,People_Hospitalized,Mortality_Rate,UID,ISO3,Testing_Rate,Hospitalization_Rate
+Alabama,US,2020-11-03 06:00:57,32.3182,-86.9023,194892,2973,81005.0,110914.0,1.0,3974.8041324159694,1356420.0,,1.525460254910412,84000001,USA,27664.05917786092,
+Alaska,US,2020-11-03 06:00:57,61.3707,-152.4044,17057,84,7110.0,9863.0,2.0,2331.640568932875,620170.0,,0.4924664360673037,84000002,USA,84775.37267017066,
+American Samoa,US,2020-11-03 06:00:57,-14.271,-170.132,0,0,,0.0,60.0,0.0,1768.0,,,16,ASM,3177.5129850290255,
+
+CasesOct26.txt:
+Province_State,Country_Region,Last_Update,Lat,Long_,Confirmed,Deaths,Recovered,Active,FIPS,Incident_Rate,People_Tested,People_Hospitalized,Mortality_Rate,UID,ISO3,Testing_Rate,Hospitalization_Rate
+Alabama,US,2020-10-27 04:30:25,32.3182,-86.9023,185322,2866,74439.0,108017.0,1.0,3779.624876483347,1307694.0,,1.54649744768565,84000001,USA,26670.2969600372,
+Alaska,US,2020-10-27 04:30:25,61.3707,-152.4044,13356,68,6948.0,6340.0,2.0,1825.7250066639785,570844.0,,0.5091344713986223,84000002,USA,78032.65691105809,
+American Samoa,US,2020-10-27 04:30:25,-14.271,-170.132,0,0,,0.0,60.0,0.0,1616.0,,,16,ASM,2904.3331356373897,
+
+CasesOct19.txt:
+Province_State,Country_Region,Last_Update,Lat,Long_,Confirmed,Deaths,Recovered,Active,FIPS,Incident_Rate,People_Tested,People_Hospitalized,Mortality_Rate,UID,ISO3,Testing_Rate,Hospitalization_Rate
+Alabama,US,2020-10-20 04:30:29,32.3182,-86.9023,173485,2789,74238.0,96458.0,1.0,3538.21036734286,1260100.0,,1.6076317837277,84000001,USA,25699.62177645755,
+Alaska,US,2020-10-20 04:30:29,61.3707,-152.4044,11182,67,6516.0,4599.0,2.0,1528.5457490653346,536223.0,,0.5991772491504204,84000002,USA,73300.07039895016,
+American Samoa,US,2020-10-20 04:30:29,-14.271,-170.132,0,0,,0.0,60.0,0.0,1616.0,,,16,ASM,2904.3331356373897,
+
+CasesOct12.txt:
+Province_State,Country_Region,Last_Update,Lat,Long_,Confirmed,Deaths,Recovered,Active,FIPS,Incident_Rate,People_Tested,People_Hospitalized,Mortality_Rate,UID,ISO3,Testing_Rate,Hospitalization_Rate
+Alabama,US,2020-10-13 04:30:36,32.3182,-86.9023,166076,2665,71240.0,92171.0,1.0,3387.1045045210412,1214610.0,,1.6046870107661553,84000001,USA,24771.857476313864,
+Alaska,US,2020-10-13 04:30:36,61.3707,-152.4044,9877,60,5802.0,4015.0,2.0,1350.1561763117786,505927.0,,0.6074719044244203,84000002,USA,69158.69837125536,
+American Samoa,US,2020-10-13 04:30:36,-14.271,-170.132,0,0,,0.0,60.0,0.0,1616.0,,,16,ASM,2904.3331356373897,
+
+
+Secondary Dataset: American Community Survey from the US Census Bureau (Census_staging in BigQuery)
+URLs for data:
+US_65andOver.csv - https://www2.census.gov/programs-surveys/acs/summary_file/2019/data/1_year_geographic_comparison_tables/GCT0103.csv
+US_Poverty65andOver.csv - https://www2.census.gov/programs-surveys/acs/summary_file/2019/data/1_year_geographic_comparison_tables/GCT1703.csv
+US_Poverty.csv - https://www2.census.gov/programs-surveys/acs/summary_file/2019/data/1_year_geographic_comparison_tables/GCT1701.csv
+US_HealthcareForce.csv - https://www2.census.gov/programs-surveys/acs/summary_file/2019/data/1_year_geographic_comparison_tables/GCT2408.csv
+US_HealthInsurance.csv - https://www2.census.gov/programs-surveys/acs/summary_file/2019/data/1_year_geographic_comparison_tables/GCT2701.csv
+
+Key Information:
+Estimate - The key feature in each entity, this attribute contains the estimate of the metric of interest for joins with BigQuery.
+GeoName - This attibute features the name of the geographic region for each record. This is the key attibute to join with the Province_State attribute from the JHU dataset.
+US_65andOver - This entity features the senior populations as a percentage of the total population across a variety of communities. This is useful to help identify areas that may be at risk for higher hospitalization or mortality rates if experiencing a COVID surge.
+US_Poverty65andOver - This entity lists the percentage of senior citizens who are living in poverty in each community. This may help explain a relationship between hospitalization rate and mortality rate, as poverty may be associated with worse outcomes in the healthcare system.
+US_Poverty - This entity tracks the poverty rates as a percentage of the population for each geographic area. This may connect with incidence rates and hospitalization rates, as impoverished populations would be more likely to have occupational COVID19 contraction risk and the comorbidities associated with hospitalization.
+US_HealthcareForce - This entity represents the proportion of the working population employed in the healthcare sector. Broadly, this may be associated with the state's ability to handle a COVID surge and explain connections between hospitalization rates and mortality rates.
+US_HealthInsurance - This entity tracks the percent of the population without health insurance. By affecting the levels of care and people's willingness to seek help, this could connect hospitalization rates and mortality rates, especially in states with lower hospitalization rates and higher mortality rates.
+
+Entity Samples:
+US_65andOver.csv:
+TBLID,GEOID,GEONAME,PROFLN,ESTIMATE,MG_ERROR
+R0103,04000US01,Alabama,3,17.4,+/-0.1
+R0103,04000US02,Alaska,3,12.4,+/-0.3
+R0103,04000US04,Arizona,3,18.0,+/-0.1
+R0103,04000US05,Arkansas,3,17.4,+/-0.1
+
+US_Poverty65andOver.csv:
+TBLID,GEOID,GEONAME,PROFLN,ESTIMATE,MG_ERROR
+R1703,04000US01,Alabama,57,10.5,+/-0.6
+R1703,04000US02,Alaska,57,6.9,+/-1.7
+R1703,04000US04,Arizona,57,9.0,+/-0.5
+R1703,04000US05,Arkansas,57,10.5,+/-0.8
+
+US_Poverty.csv:
+TBLID,GEOID,GEONAME,PROFLN,ESTIMATE,MG_ERROR
+R1701,04000US01,Alabama,55,15.5,+/-0.5
+R1701,04000US02,Alaska,55,10.1,+/-1.1
+R1701,04000US04,Arizona,55,13.5,+/-0.5
+R1701,04000US05,Arkansas,55,16.2,+/-0.6
+
+US_HealthcareForce.csv:
+TBLID,GEOID,GEONAME,PROFLN,ESTIMATE,MG_ERROR
+R2408,04000US01,Alabama,105,6.9,+/-0.3
+R2408,04000US02,Alaska,105,5.7,+/-0.6
+R2408,04000US04,Arizona,105,5.6,+/-0.3
+R2408,04000US05,Arkansas,105,6.8,+/-0.4
+
+US_HealthInsurance.csv:
+TBLID,GEOID,GEONAME,PROFLN,ESTIMATE,MG_ERROR
+R2701,04000US01,Alabama,100,9.7,+/-0.3
+R2701,04000US02,Alaska,100,12.2,+/-0.8
+R2701,04000US04,Arizona,100,11.3,+/-0.3
+R2701,04000US05,Arkansas,100,9.1,+/-0.4
+
+Overall Objective: Health experts have consistently warned of a second COVID-19 surge in the winter months, and recent news coverage has suggested this surge may already be underway. Because of this, we want to illustrate and assess the differences in risk faced by each state in the event of an outbreak based on several key demographic characteristics. Using the primary data, we hope to use the metrics to measure the actual effectiveness of the COVID-19 response and track changes in these metrics over time to see which states are struggling with the surge and which ones are managing more effectively. Using the secondary dataset, we want to investigate some potential explanatory variables related to worse outcomes for individual patient groups and poor health system preparedness for an upcoming surge.
